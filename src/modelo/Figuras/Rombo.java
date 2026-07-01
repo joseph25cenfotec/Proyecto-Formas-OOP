@@ -58,11 +58,10 @@ public class Rombo extends Figura {
 
     @Override
     public String toString() {
-        return "Rombo{" +
+        return "Rombo: " +
                 "lado=" + lado +
                 ", diagonalMayor=" + diagonalMayor +
-                ", diagonalMenor=" + diagonalMenor +
-                '}';
+                ", diagonalMenor=" + diagonalMenor;
     }
 
 }

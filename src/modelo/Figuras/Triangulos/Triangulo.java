@@ -63,12 +63,11 @@ public abstract class Triangulo extends Figura {
 
     @Override
     public String toString() {
-        return "Triangulo{" +
+        return "Triangulo: " +
                 "tipo='" + getTipo() + '\'' +
                 ", lado1=" + getLado1() +
                 ", lado2=" + getLado2() +
-                ", lado3=" + getLado3() +
-                '}';
+                ", lado3=" + getLado3();
     }
 
 }
