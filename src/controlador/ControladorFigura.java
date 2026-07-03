@@ -1,13 +1,13 @@
 package controlador;
 
 import modelo.Coleccion;
-import modelo.Figuras.Circulo;
-import modelo.Figuras.Cuadrado;
-import modelo.Figuras.Rectangulo;
-import modelo.Figuras.Rombo;
-import modelo.Figuras.Triangulos.Equilatero;
-import modelo.Figuras.Triangulos.Escaleno;
-import modelo.Figuras.Triangulos.Isosceles;
+import modelo.figuras.Circulo;
+import modelo.figuras.Cuadrado;
+import modelo.figuras.Rectangulo;
+import modelo.figuras.Rombo;
+import modelo.figuras.Triangulos.Equilatero;
+import modelo.figuras.Triangulos.Escaleno;
+import modelo.figuras.Triangulos.Isosceles;
 import vista.Menu;
 
 import java.util.Scanner;

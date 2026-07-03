@@ -1,10 +1,10 @@
-package modelo.Figuras;
+package modelo.cuerpos;
 
-public class Circulo extends Figura {
+public class Esfera extends Cuerpo {
 
     private double radio;
 
-    public Circulo(double radio) {
+    public Esfera(double radio) {
         this.radio = radio;
     }
 
@@ -18,25 +18,31 @@ public class Circulo extends Figura {
 
     @Override
     public double calcularArea() {
-        return Math.PI * radio * radio;
+        return 4 * Math.PI * radio * radio;
     }
 
     @Override
     public double calcularPerimetro() {
-        return 2 * Math.PI * radio;
+        return 0;
+    }
+
+    @Override
+    public double calcularVolumen() {
+        return (4.0 / 3.0) * Math.PI * radio * radio * radio;
     }
 
     @Override
     public void imprimirInformacion() {
-        System.out.println("Círculo");
+        System.out.println("Esfera");
         System.out.println("Radio: " + radio);
         System.out.println("Área: " + calcularArea());
-        System.out.println("Perímetro: " + calcularPerimetro());
+        System.out.println("Volumen: " + calcularVolumen());
     }
 
     @Override
     public String toString() {
-        return "Circulo: " +
-                "radio=" + radio;
+        return "Esfera{" +
+                "radio=" + radio +
+                '}';
     }
 }

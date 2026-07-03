@@ -1,4 +1,4 @@
-package modelo.Cuerpos;
+package modelo.cuerpos;
 
 import modelo.Forma;
 

@@ -1,6 +1,6 @@
-package modelo.Figuras.Triangulos;
+package modelo.figuras.Triangulos;
 
-import modelo.Figuras.Figura;
+import modelo.figuras.Figura;
 
 public abstract class Triangulo extends Figura {
 

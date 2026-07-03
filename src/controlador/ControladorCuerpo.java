@@ -1,21 +1,19 @@
 package controlador;
 
 import modelo.Coleccion;
-import modelo.Cuerpos.Cubo;
-import modelo.Cuerpos.Esfera;
-import modelo.Cuerpos.Tetraedro;
-import modelo.Figuras.Cuadrado;
-import modelo.Figuras.Triangulos.Equilatero;
-import modelo.Figuras.Triangulos.Escaleno;
-import modelo.Figuras.Triangulos.Isosceles;
-import modelo.Figuras.Triangulos.Triangulo;
+import modelo.cuerpos.Cubo;
+import modelo.cuerpos.Esfera;
+import modelo.cuerpos.Tetraedro;
+import modelo.figuras.Cuadrado;
+import modelo.figuras.Triangulos.Equilatero;
+import modelo.figuras.Triangulos.Escaleno;
+import modelo.figuras.Triangulos.Isosceles;
+import modelo.figuras.Triangulos.Triangulo;
 import vista.Menu;
-import modelo.Cuerpos.Cilindro;
-import modelo.Figuras.Circulo;
+import modelo.cuerpos.Cilindro;
+import modelo.figuras.Circulo;
 
 import java.util.Scanner;
-
-import static java.awt.SystemColor.menu;
 
 public class ControladorCuerpo {
     private Menu menu;

@@ -1,4 +1,4 @@
-package modelo.Figuras.Triangulos;
+package modelo.figuras.Triangulos;
 
 public class Isosceles extends Triangulo{
     public Isosceles(double lado1, double lado2, double lado3) {

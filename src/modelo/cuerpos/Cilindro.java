@@ -1,6 +1,6 @@
-package modelo.Cuerpos;
+package modelo.cuerpos;
 
-import modelo.Figuras.Circulo;
+import modelo.figuras.Circulo;
 
 public class Cilindro extends Cuerpo {
 

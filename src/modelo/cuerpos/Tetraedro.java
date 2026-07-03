@@ -1,6 +1,6 @@
-package modelo.Cuerpos;
+package modelo.cuerpos;
 
-import modelo.Figuras.Triangulos.Triangulo;
+import modelo.figuras.Triangulos.Triangulo;
 
 public class Tetraedro extends Cuerpo {
 

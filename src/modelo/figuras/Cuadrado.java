@@ -1,4 +1,4 @@
-package modelo.Figuras;
+package modelo.figuras;
 
 public class Cuadrado extends Rectangulo {
 

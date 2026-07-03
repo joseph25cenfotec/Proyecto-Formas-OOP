@@ -4,13 +4,6 @@ import java.util.Scanner;
 
 import vista.Menu;
 import modelo.Coleccion;
-import modelo.Figuras.Cuadrado;
-import modelo.Figuras.Circulo;
-import modelo.Figuras.Rectangulo;
-import modelo.Figuras.Rombo;
-import modelo.Figuras.Triangulos.Escaleno;
-import modelo.Figuras.Triangulos.Equilatero;
-import modelo.Figuras.Triangulos.Isosceles;
 
 
 public class ControladorPrincipal {

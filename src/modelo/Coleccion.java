@@ -1,7 +1,7 @@
 package modelo;
 
-import modelo.Cuerpos.Cuerpo;
-import modelo.Figuras.Figura;
+import modelo.cuerpos.Cuerpo;
+import modelo.figuras.Figura;
 
 import java.util.ArrayList;
 
