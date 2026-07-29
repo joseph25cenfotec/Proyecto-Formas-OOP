@@ -43,11 +43,11 @@ public class Menu {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public int pedirEnteroPositivo(Scanner scanner, String mensaje) {
+    public double pedirNumeroPositivo(Scanner scanner, String mensaje) {
         while (true) {
             try {
                 System.out.println(mensaje);
-                int numero = Integer.parseInt(scanner.nextLine());
+                double numero = Double.parseDouble(scanner.nextLine());
 
                 if (numero > 0) {
                     return numero;

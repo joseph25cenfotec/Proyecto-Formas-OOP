@@ -1,23 +1,32 @@
 package controlador;
 
 import java.util.Scanner;
-
 import vista.Menu;
 import modelo.Coleccion;
 
-
 public class ControladorPrincipal {
-    private Menu menu;
-    private Coleccion coleccion;
-    private Scanner scanner;
-
-    ControladorFigura controladorFigura = new ControladorFigura(menu, coleccion, scanner);
-    ControladorCuerpo controladorCuerpo = new ControladorCuerpo(menu, coleccion, scanner);
+    private final Menu menu;
+    private final Coleccion coleccion;
+    private final Scanner scanner;
+    private final ControladorFigura controladorFigura;
+    private final ControladorCuerpo controladorCuerpo;
 
     public ControladorPrincipal(Menu menu, Coleccion coleccion) {
         this.menu = menu;
         this.coleccion = coleccion;
         this.scanner = new Scanner(System.in);
+
+        this.controladorFigura = new ControladorFigura(
+                this.menu,
+                this.coleccion,
+                this.scanner
+        );
+
+        this.controladorCuerpo = new ControladorCuerpo(
+                this.menu,
+                this.coleccion,
+                this.scanner
+        );
     }
 
     public void iniciar() {
@@ -66,5 +75,7 @@ public class ControladorPrincipal {
                     break;
             }
         }
+
+        scanner.close();
     }
 }

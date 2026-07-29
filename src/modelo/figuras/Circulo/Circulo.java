@@ -1,4 +1,6 @@
-package modelo.figuras;
+package modelo.figuras.Circulo;
+
+import modelo.figuras.Figura;
 
 public class Circulo extends Figura {
 

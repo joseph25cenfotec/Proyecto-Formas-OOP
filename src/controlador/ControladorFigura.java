@@ -1,7 +1,7 @@
 package controlador;
 
+import gestores.GestorCirculo;
 import modelo.Coleccion;
-import modelo.figuras.Circulo;
 import modelo.figuras.Cuadrado;
 import modelo.figuras.Rectangulo;
 import modelo.figuras.Rombo;
@@ -54,20 +54,26 @@ public class ControladorFigura {
     }
 
     private void crearCuadrado() {
-        int lado = menu.pedirEnteroPositivo(scanner, "Introduzca la medida del lado:");
+        double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
         coleccion.agregarFigura(new Cuadrado(lado));
         menu.mostrarMensaje("# Cuadrado creado #");
     }
 
     private void crearCirculo() {
-        int radio = menu.pedirEnteroPositivo(scanner, "Introduzca la medida del radio:");
-        coleccion.agregarFigura(new Circulo(radio));
-        menu.mostrarMensaje("# Círculo creado #");
+        try {
+            double radio = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del radio:");
+            System.out.println(GestorCirculo.agregarCirculo(radio));
+            menu.mostrarMensaje("# Círculo creado #");
+        } catch (NumberFormatException e){
+            System.out.println("El dato ingresado no es un número válido");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void crearRectangulo() {
-        int base = menu.pedirEnteroPositivo(scanner, "Introduzca la medida de la base:");
-        int altura = menu.pedirEnteroPositivo(scanner, "Introduzca la medida de la altura:");
+        double base = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la base:");
+        double altura = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la altura:");
 
         coleccion.agregarFigura(new Rectangulo(base, altura));
         menu.mostrarMensaje("# Rectángulo creado #");
@@ -75,9 +81,9 @@ public class ControladorFigura {
 
     private void crearRombo() {
         while (true) {
-            int lado = menu.pedirEnteroPositivo(scanner, "Introduzca la medida del lado:");
-            int diagonalMayor = menu.pedirEnteroPositivo(scanner, "Introduzca la medida de la diagonal mayor:");
-            int diagonalMenor = menu.pedirEnteroPositivo(scanner, "Introduzca la medida de la diagonal menor:");
+            double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
+            double diagonalMayor = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la diagonal mayor:");
+            double diagonalMenor = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la diagonal menor:");
 
             if (diagonalMayor > diagonalMenor) {
                 coleccion.agregarFigura(new Rombo(lado, diagonalMayor, diagonalMenor));
@@ -91,9 +97,9 @@ public class ControladorFigura {
 
     private void crearTriangulo() {
         while (true) {
-            int lado1 = menu.pedirEnteroPositivo(scanner, "Introduzca la medida del primer lado:");
-            int lado2 = menu.pedirEnteroPositivo(scanner, "Introduzca la medida del segundo lado:");
-            int lado3 = menu.pedirEnteroPositivo(scanner, "Introduzca la medida del tercer lado:");
+            double lado1 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del primer lado:");
+            double lado2 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del segundo lado:");
+            double lado3 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del tercer lado:");
 
             if (!esTrianguloValido(lado1, lado2, lado3)) {
                 menu.mostrarMensaje("Los lados no forman un triángulo válido.");
@@ -118,7 +124,7 @@ public class ControladorFigura {
         }
     }
 
-    private boolean esTrianguloValido(int lado1, int lado2, int lado3) {
+    private boolean esTrianguloValido(double lado1, double lado2, double lado3) {
         return lado1 + lado2 > lado3 &&
                 lado1 + lado3 > lado2 &&
                 lado2 + lado3 > lado1;
