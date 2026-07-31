@@ -1,4 +1,6 @@
-package modelo.figuras;
+package modelo.figuras.cuadrado;
+
+import modelo.figuras.rectangulo.Rectangulo;
 
 public class Cuadrado extends Rectangulo {
 

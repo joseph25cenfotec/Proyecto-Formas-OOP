@@ -1,6 +1,7 @@
-package modelo.cuerpos;
+package modelo.cuerpos.cubo;
 
-import modelo.figuras.Cuadrado;
+import modelo.cuerpos.Cuerpo;
+import modelo.figuras.cuadrado.Cuadrado;
 
 public class Cubo extends Cuerpo {
 

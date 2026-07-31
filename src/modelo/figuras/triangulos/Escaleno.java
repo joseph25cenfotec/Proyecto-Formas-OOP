@@ -1,4 +1,4 @@
-package modelo.figuras.Triangulos;
+package modelo.figuras.triangulos;
 
 public class Escaleno extends Triangulo {
 

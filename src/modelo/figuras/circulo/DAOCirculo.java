@@ -1,8 +1,7 @@
-package modelo.figuras.Circulo;
+package modelo.figuras.circulo;
 import datos.Connector;
 
 public class DAOCirculo {
-
     private static String statement;
     private static String query;
 
@@ -11,5 +10,4 @@ public class DAOCirculo {
         Connector.getConnection().ejecutarStatement(statement);
         return "El círculo se registro correctamente en DB";
     }
-
 }

@@ -1,4 +1,6 @@
-package modelo.figuras;
+package modelo.figuras.rombo;
+
+import modelo.figuras.Figura;
 
 public class Rombo extends Figura {
 

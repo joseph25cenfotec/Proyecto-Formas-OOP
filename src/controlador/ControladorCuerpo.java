@@ -1,17 +1,11 @@
 package controlador;
 
 import modelo.Coleccion;
-import modelo.cuerpos.Cubo;
-import modelo.cuerpos.Esfera;
-import modelo.cuerpos.Tetraedro;
-import modelo.figuras.Cuadrado;
-import modelo.figuras.Triangulos.Equilatero;
-import modelo.figuras.Triangulos.Escaleno;
-import modelo.figuras.Triangulos.Isosceles;
-import modelo.figuras.Triangulos.Triangulo;
+import modelo.cuerpos.cilindro.GestorCilindro;
+import modelo.cuerpos.cubo.GestorCubo;
+import modelo.cuerpos.esfera.GestorEsfera;
+import modelo.cuerpos.tetraedro.GestorTetraedro;
 import vista.Menu;
-import modelo.cuerpos.Cilindro;
-import modelo.figuras.Circulo.Circulo;
 
 import java.util.Scanner;
 
@@ -33,19 +27,15 @@ public class ControladorCuerpo {
             case 1:
                 crearCilindro();
                 break;
-
             case 2:
                 crearCubo();
                 break;
-
             case 3:
                 crearEsfera();
                 break;
-
             case 4:
                 crearTetraedro();
                 break;
-
             default:
                 menu.mostrarMensaje("Opción inválida.");
                 break;
@@ -53,66 +43,60 @@ public class ControladorCuerpo {
     }
 
     private void crearCilindro() {
-        double radio = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del radio:");
-        double altura = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la altura:");
+        try {
+            double radio = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del radio:");
+            double altura = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la altura:");
 
-        Circulo base = new Circulo(radio);
-        coleccion.agregarCuerpo(new Cilindro(base, altura));
-
-        menu.mostrarMensaje("# Cilindro creado #");
-    }
-
-    private void crearCubo() {
-        double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
-
-        Cuadrado cara = new Cuadrado(lado);
-        coleccion.agregarCuerpo(new Cubo(cara));
-
-        menu.mostrarMensaje("# Cubo creado #");
-    }
-
-    private void crearEsfera() {
-        double radio = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del radio:");
-
-        coleccion.agregarCuerpo(new Esfera(radio));
-
-        menu.mostrarMensaje("# Esfera creada #");
-    }
-
-    private void crearTetraedro() {
-        while (true) {
-            double lado1 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del primer lado:");
-            double lado2 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del segundo lado:");
-            double lado3 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del tercer lado:");
-
-            if (!esTrianguloValido(lado1, lado2, lado3)) {
-                menu.mostrarMensaje("Los lados no forman un triángulo válido.");
-                continue;
-            }
-
-            double altura = menu.pedirNumeroPositivo(scanner, "Introduzca la altura del tetraedro:");
-
-            Triangulo cara;
-
-            if (lado1 == lado2 && lado2 == lado3) {
-                cara = new Equilatero(lado1, lado2, lado3);
-            } else if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
-                cara = new Isosceles(lado1, lado2, lado3);
-            } else {
-                cara = new Escaleno(lado1, lado2, lado3);
-            }
-
-            coleccion.agregarCuerpo(new Tetraedro(cara, altura));
-            menu.mostrarMensaje("# Tetraedro creado #");
-            break;
+            String respuesta = GestorCilindro.agregarCilindro(radio, altura);
+            menu.mostrarMensaje(respuesta);
+            menu.mostrarMensaje("# Cilindro creado #");
+        } catch (NumberFormatException e) {
+            System.out.println("El dato ingresado no es un número válido.");
+        } catch (Exception e) {
+            menu.mostrarMensaje("Error al crear Cilindro: " + e.getMessage());
         }
     }
 
-    private boolean esTrianguloValido(double lado1, double lado2, double lado3) {
-        return lado1 + lado2 > lado3 &&
-                lado1 + lado3 > lado2 &&
-                lado2 + lado3 > lado1;
+    private void crearCubo() {
+        try {
+            double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
+
+            String respuesta = GestorCubo.agregarCubo(lado);
+            menu.mostrarMensaje(respuesta);
+            menu.mostrarMensaje("# Cubo creado #");
+        } catch (NumberFormatException e) {
+            System.out.println("El dato ingresado no es un número válido.");
+        } catch (Exception e) {
+            menu.mostrarMensaje("Error al crear Cubo: " + e.getMessage());
+        }
+    }
+
+    private void crearEsfera() {
+        try {
+            double radio = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del radio:");
+
+            String respuesta = GestorEsfera.agregarEsfera(radio);
+            menu.mostrarMensaje(respuesta);
+            menu.mostrarMensaje("# Esfera creada #");
+        } catch (NumberFormatException e) {
+            System.out.println("El dato ingresado no es un número válido.");
+        } catch (Exception e) {
+            menu.mostrarMensaje("Error al crear Esfera: " + e.getMessage());
+        }
+    }
+
+    private void crearTetraedro() {
+        try {
+            double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado de la cara equilátera:");
+            double altura = menu.pedirNumeroPositivo(scanner, "Introduzca la altura del tetraedro:");
+
+            String respuesta = GestorTetraedro.agregarTetraedro(lado, altura);
+            menu.mostrarMensaje(respuesta);
+            menu.mostrarMensaje("# Tetraedro creado #");
+        } catch (NumberFormatException e) {
+            System.out.println("El dato ingresado no es un número válido.");
+        } catch (Exception e) {
+            menu.mostrarMensaje("Error al crear Tetraedro: " + e.getMessage());
+        }
     }
 }
-
-

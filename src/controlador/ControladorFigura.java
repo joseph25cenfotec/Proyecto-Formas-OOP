@@ -1,13 +1,14 @@
 package controlador;
 
-import gestores.GestorCirculo;
 import modelo.Coleccion;
-import modelo.figuras.Cuadrado;
-import modelo.figuras.Rectangulo;
-import modelo.figuras.Rombo;
-import modelo.figuras.Triangulos.Equilatero;
-import modelo.figuras.Triangulos.Escaleno;
-import modelo.figuras.Triangulos.Isosceles;
+
+import modelo.figuras.circulo.GestorCirculo;
+import modelo.figuras.cuadrado.GestorCuadrado;
+import modelo.figuras.rectangulo.GestorRectangulo;
+import modelo.figuras.rombo.GestorRombo;
+import modelo.figuras.triangulos.GestorTriangulo;
+
+import utils.Utils;
 import vista.Menu;
 
 import java.util.Scanner;
@@ -54,9 +55,15 @@ public class ControladorFigura {
     }
 
     private void crearCuadrado() {
-        double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
-        coleccion.agregarFigura(new Cuadrado(lado));
-        menu.mostrarMensaje("# Cuadrado creado #");
+        try {
+            double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
+            System.out.println(GestorCuadrado.agregarCuadrado(lado));
+            menu.mostrarMensaje("# Cuadrado creado #");
+        } catch (NumberFormatException e){
+            System.out.println("El dato ingresado no es un número válido");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void crearCirculo() {
@@ -72,61 +79,62 @@ public class ControladorFigura {
     }
 
     private void crearRectangulo() {
-        double base = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la base:");
-        double altura = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la altura:");
-
-        coleccion.agregarFigura(new Rectangulo(base, altura));
-        menu.mostrarMensaje("# Rectángulo creado #");
+        try {
+            double base = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la base:");
+            double altura = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la altura:");
+            System.out.println(GestorRectangulo.agregarRectangulo(base, altura));
+            menu.mostrarMensaje("# Rectángulo creado #");
+        } catch (NumberFormatException e){
+            System.out.println("El dato ingresado no es un número válido");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void crearRombo() {
-        while (true) {
+        try {
             double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
             double diagonalMayor = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la diagonal mayor:");
             double diagonalMenor = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de la diagonal menor:");
 
             if (diagonalMayor > diagonalMenor) {
-                coleccion.agregarFigura(new Rombo(lado, diagonalMayor, diagonalMenor));
+                System.out.println(GestorRombo.agregarRombo(lado, diagonalMayor, diagonalMenor));
                 menu.mostrarMensaje("# Rombo creado #");
-                break;
+            } else {
+                System.out.println("Las Diagonales son inválidas, la Diagonal Mayor no puede ser menor que la Diagonal menor");
             }
 
             menu.mostrarMensaje("La diagonal mayor debe ser más grande que la diagonal menor.");
+        } catch (NumberFormatException e){
+            System.out.println("El dato ingresado no es un número válido");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void crearTriangulo() {
         while (true) {
-            double lado1 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del primer lado:");
-            double lado2 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del segundo lado:");
-            double lado3 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del tercer lado:");
+            try {
+                double lado1 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del primer lado:");
+                double lado2 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del segundo lado:");
+                double lado3 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del tercer lado:");
 
-            if (!esTrianguloValido(lado1, lado2, lado3)) {
-                menu.mostrarMensaje("Los lados no forman un triángulo válido.");
-                continue;
-            }
+                if (!Utils.esTrianguloValido(lado1, lado2, lado3)) {
+                    menu.mostrarMensaje("Los lados no forman un triángulo válido.");
+                    continue;
+                }
 
-            if (lado1 == lado2 && lado2 == lado3) {
-                coleccion.agregarFigura(new Equilatero(lado1, lado2, lado3));
-                menu.mostrarMensaje("# Triángulo Equilátero creado #");
+                // Llamada directa al Gestor enviando únicamente los 3 lados
+                String respuesta = GestorTriangulo.agregarTriangulo(lado1, lado2, lado3);
+                menu.mostrarMensaje(respuesta);
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("El dato ingresado no es un número válido.");
+            } catch (Exception e) {
+                menu.mostrarMensaje("Error al guardar el triángulo: " + e.getMessage());
                 break;
             }
-
-            if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
-                coleccion.agregarFigura(new Isosceles(lado1, lado2, lado3));
-                menu.mostrarMensaje("# Triángulo Isósceles creado #");
-                break;
-            }
-
-            coleccion.agregarFigura(new Escaleno(lado1, lado2, lado3));
-            menu.mostrarMensaje("# Triángulo Escaleno creado #");
-            break;
         }
-    }
-
-    private boolean esTrianguloValido(double lado1, double lado2, double lado3) {
-        return lado1 + lado2 > lado3 &&
-                lado1 + lado3 > lado2 &&
-                lado2 + lado3 > lado1;
     }
 }

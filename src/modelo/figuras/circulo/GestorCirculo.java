@@ -1,7 +1,4 @@
-package gestores;
-
-import modelo.figuras.Circulo.Circulo;
-import modelo.figuras.Circulo.DAOCirculo;
+package modelo.figuras.circulo;
 
 public class GestorCirculo {
     public static String agregarCirculo(double radio) throws Exception {

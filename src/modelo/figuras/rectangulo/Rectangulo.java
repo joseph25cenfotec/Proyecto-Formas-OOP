@@ -1,4 +1,6 @@
-package modelo.figuras;
+package modelo.figuras.rectangulo;
+
+import modelo.figuras.Figura;
 
 public class Rectangulo extends Figura {
 

@@ -27,4 +27,10 @@ public class Utils {
             throw e;
         }
     }
+
+    public static boolean esTrianguloValido(double lado1, double lado2, double lado3) {
+        return lado1 + lado2 > lado3 &&
+                lado1 + lado3 > lado2 &&
+                lado2 + lado3 > lado1;
+    }
 }
