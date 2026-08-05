@@ -1,6 +1,19 @@
 package controlador;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import modelo.cuerpos.Cuerpo;
+import modelo.cuerpos.cilindro.GestorCilindro;
+import modelo.cuerpos.cubo.GestorCubo;
+import modelo.cuerpos.esfera.GestorEsfera;
+import modelo.cuerpos.tetraedro.GestorTetraedro;
+import modelo.figuras.Figura;
+import modelo.figuras.circulo.GestorCirculo;
+import modelo.figuras.cuadrado.GestorCuadrado;
+import modelo.figuras.rectangulo.GestorRectangulo;
+import modelo.figuras.rombo.GestorRombo;
+import modelo.figuras.triangulos.GestorTriangulo;
 import vista.Menu;
 import modelo.Coleccion;
 
@@ -55,7 +68,7 @@ public class ControladorPrincipal {
                     break;
 
                 case 5:
-                    menu.mostrarMensaje("Área total: " + coleccion.calcularAreaTotal());
+                    menu.mostrarMensaje("Área total: " + calcularAreaTotal());
                     break;
 
                 case 6:
@@ -77,5 +90,60 @@ public class ControladorPrincipal {
         }
 
         scanner.close();
+    }
+
+    public static double calcularAreaTotal() throws Exception {
+        // Figuras
+        ArrayList<Figura> listaFiguras = new ArrayList<>();
+        GestorCirculo.listarCirculos(listaFiguras);
+        GestorCuadrado.listarCuadrados(listaFiguras);
+        GestorRectangulo.listarRectangulos(listaFiguras);
+        GestorRombo.listarRombos(listaFiguras);
+        GestorTriangulo.listarTriangulos(listaFiguras);
+
+        // Cuerpos
+        ArrayList<Cuerpo> listaCuerpos = new ArrayList<>();
+        GestorCilindro.listarCilindros(listaCuerpos);
+        GestorCubo.listarCubos(listaCuerpos);
+        GestorEsfera.listarEsfera(listaCuerpos);
+        GestorTetraedro.listarTetraedros(listaCuerpos);
+
+        double areaAcumulada = 0;
+        for (Figura figuraTemp : listaFiguras) {
+            areaAcumulada += figuraTemp.calcularArea();
+        }
+        for (Cuerpo cuerpoTemp : listaCuerpos) {
+            areaAcumulada += cuerpoTemp.calcularArea();
+        }
+
+        return areaAcumulada;
+    }
+
+    public static double calcularPerimetroTotal() throws Exception {
+        // Figuras
+        ArrayList<Figura> listaFiguras = new ArrayList<>();
+        GestorCirculo.listarCirculos(listaFiguras);
+        GestorCuadrado.listarCuadrados(listaFiguras);
+        GestorRectangulo.listarRectangulos(listaFiguras);
+        GestorRombo.listarRombos(listaFiguras);
+        GestorTriangulo.listarTriangulos(listaFiguras);
+
+        // Cuerpos
+        ArrayList<Cuerpo> listaCuerpos = new ArrayList<>();
+        GestorCilindro.listarCilindros(listaCuerpos);
+        GestorCubo.listarCubos(listaCuerpos);
+        GestorEsfera.listarEsfera(listaCuerpos);
+        GestorTetraedro.listarTetraedros(listaCuerpos);
+
+        double perimetroAcumulado = 0;
+
+        for (Figura figuraTemp : listaFiguras) {
+            perimetroAcumulado += figuraTemp.calcularPerimetro();
+        }
+        for (Cuerpo cuerpoTemp : listaCuerpos) {
+            perimetroAcumulado += cuerpoTemp.calcularPerimetro();
+        }
+
+        return perimetroAcumulado;
     }
 }

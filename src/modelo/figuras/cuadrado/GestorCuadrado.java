@@ -5,4 +5,8 @@ public class GestorCuadrado {
         Cuadrado nuevoCuadrado = new Cuadrado(radio);
         return DAOCuadrado.insertarCuadrado(nuevoCuadrado);
     }
+
+    public static void listarCuadrados() throws Exception {
+        System.out.println("TODO");
+    }
 }

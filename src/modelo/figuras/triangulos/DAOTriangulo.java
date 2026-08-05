@@ -1,6 +1,10 @@
 package modelo.figuras.triangulos;
 
 import datos.Connector;
+import modelo.figuras.Figura;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DAOTriangulo {
     private static String statement;
@@ -39,5 +43,69 @@ public class DAOTriangulo {
         }
 
         return "No se pudo identificar el tipo de triángulo";
+    }
+
+    public static ArrayList<Equilatero> listarEquilateros() throws Exception {
+        ArrayList<Equilatero> listaEquilateros = new ArrayList<>();
+
+        String query = "SELECT * FROM t_equilateros";
+        ResultSet resultado = Connector.getConnection().ejecutarQuery(query);
+
+        if (!resultado.next()) {
+            return null;
+        }
+
+        do {
+            Equilatero equilateroTemp = new Equilatero(
+                    resultado.getDouble("lado")
+            );
+            listaEquilateros.add(equilateroTemp);
+        } while (resultado.next());
+
+        return listaEquilateros;
+    }
+
+    public static ArrayList<Escaleno> listarEscalenos() throws Exception {
+        ArrayList<Escaleno> listaEscalenos = new ArrayList<>();
+
+        String query = "SELECT * FROM t_escalenos";
+        ResultSet resultado = Connector.getConnection().ejecutarQuery(query);
+
+        if (!resultado.next()) {
+            return null;
+        }
+
+        do {
+            Escaleno escalenoTemp = new Escaleno(
+                    resultado.getDouble("lado_1"),
+                    resultado.getDouble("lado_2"),
+                    resultado.getDouble("lado_3")
+            );
+            listaEscalenos.add(escalenoTemp);
+        } while (resultado.next());
+
+        return listaEscalenos;
+    }
+
+    public static ArrayList<Isosceles> listarIsosceles() throws Exception {
+        ArrayList<Isosceles> listaIsosceles = new ArrayList<>();
+
+        String query = "SELECT * FROM t_isosceles";
+        ResultSet resultado = Connector.getConnection().ejecutarQuery(query);
+
+        if (!resultado.next()) {
+            return null;
+        }
+
+        do {
+            Isosceles isoscelesTemp = new Isosceles(
+                    resultado.getDouble("lado_1"),
+                    resultado.getDouble("lado_2"),
+                    resultado.getDouble("lado_3")
+            );
+            listaIsosceles.add(isoscelesTemp);
+        } while (resultado.next());
+
+        return listaIsosceles;
     }
 }

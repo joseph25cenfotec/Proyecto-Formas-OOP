@@ -5,4 +5,8 @@ public class GestorRombo {
         Rombo nuevoRombo = new Rombo(lado, diagonalMayor, diagonalMenor);
         return DAORombo.insertarRombo(nuevoRombo);
     }
+
+    public static void listarRombos() throws Exception {
+        System.out.println("TODO");
+    }
 }

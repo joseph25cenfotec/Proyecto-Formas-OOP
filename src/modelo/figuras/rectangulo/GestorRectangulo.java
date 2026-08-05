@@ -5,4 +5,8 @@ public class GestorRectangulo {
         Rectangulo nuevoRectangulo = new Rectangulo(base, altura);
         return DAORectangulo.insertarRectangulo(nuevoRectangulo);
     }
+
+    public static void listarRectangulos() throws Exception {
+        System.out.println("TODO");
+    }
 }

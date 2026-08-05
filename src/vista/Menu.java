@@ -32,6 +32,16 @@ public class Menu {
         return Integer.parseInt(scanner.nextLine());
     }
 
+    public int menuCrearTriangulo(Scanner scanner) {
+        System.out.println("Seleccione un tipo de Triangulo para crear:");
+        System.out.println("1. Equilatero");
+        System.out.println("2. Escaleno");
+        System.out.println("3. Isosceles");
+        System.out.println("Ingrese una opción:");
+
+        return Integer.parseInt(scanner.nextLine());
+    }
+
     public int menuCrearCuerpo(Scanner scanner) {
         System.out.println("Seleccione una cuerpo para crear:");
         System.out.println("1. Cilindro");

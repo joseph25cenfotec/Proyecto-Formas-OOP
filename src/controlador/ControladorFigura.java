@@ -2,6 +2,7 @@ package controlador;
 
 import modelo.Coleccion;
 
+import modelo.figuras.Figura;
 import modelo.figuras.circulo.GestorCirculo;
 import modelo.figuras.cuadrado.GestorCuadrado;
 import modelo.figuras.rectangulo.GestorRectangulo;
@@ -11,6 +12,7 @@ import modelo.figuras.triangulos.GestorTriangulo;
 import utils.Utils;
 import vista.Menu;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ControladorFigura {
@@ -46,6 +48,28 @@ public class ControladorFigura {
 
             case 5:
                 crearTriangulo();
+                break;
+
+            default:
+                menu.mostrarMensaje("Opción inválida.");
+                break;
+        }
+    }
+
+    public void crearTriangulo() {
+        int opcionTriangulo = menu.menuCrearTriangulo(scanner);
+
+        switch (opcionTriangulo) {
+            case 1:
+                crearEquilatero();
+                break;
+
+            case 2:
+                crearEscaleno();
+                break;
+
+            case 3:
+                crearIsosceles();
                 break;
 
             default:
@@ -112,7 +136,34 @@ public class ControladorFigura {
         }
     }
 
-    private void crearTriangulo() {
+    private void crearEquilatero() {
+        while (true) {
+            try {
+                double lado = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado:");
+
+                double lado1 = lado;
+                double lado2 = lado;
+                double lado3 = lado;
+
+                if (!Utils.esTrianguloValido(lado1, lado2, lado3)) {
+                    menu.mostrarMensaje("Los lados no forman un triángulo válido.");
+                    continue;
+                }
+
+                String respuesta = GestorTriangulo.agregarTriangulo(lado1, lado2, lado3);
+                menu.mostrarMensaje(respuesta);
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("El dato ingresado no es un número válido.");
+            } catch (Exception e) {
+                menu.mostrarMensaje("Error al guardar el triángulo: " + e.getMessage());
+                break;
+            }
+        }
+    }
+
+    private void crearEscaleno() {
         while (true) {
             try {
                 double lado1 = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del primer lado:");
@@ -124,7 +175,11 @@ public class ControladorFigura {
                     continue;
                 }
 
-                // Llamada directa al Gestor enviando únicamente los 3 lados
+                if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
+                    menu.mostrarMensaje("Los lados ingresados no forman un triángulo escaleno.");
+                    continue;
+                }
+
                 String respuesta = GestorTriangulo.agregarTriangulo(lado1, lado2, lado3);
                 menu.mostrarMensaje(respuesta);
                 break;
@@ -135,6 +190,47 @@ public class ControladorFigura {
                 menu.mostrarMensaje("Error al guardar el triángulo: " + e.getMessage());
                 break;
             }
+        }
+    }
+
+    private void crearIsosceles() {
+        while (true) {
+            try {
+                double ladoIgual = menu.pedirNumeroPositivo(scanner, "Introduzca la medida de los dos lados iguales:");
+                double ladoDistinto = menu.pedirNumeroPositivo(scanner, "Introduzca la medida del lado distinto:");
+
+                double lado1 = ladoIgual;
+                double lado2 = ladoIgual;
+                double lado3 = ladoDistinto;
+
+                if (!Utils.esTrianguloValido(lado1, lado2, lado3)) {
+                    menu.mostrarMensaje("Los lados no forman un triángulo válido.");
+                    continue;
+                }
+
+                String respuesta = GestorTriangulo.agregarTriangulo(lado1, lado2, lado3);
+                menu.mostrarMensaje(respuesta);
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("El dato ingresado no es un número válido.");
+            } catch (Exception e) {
+                menu.mostrarMensaje("Error al guardar el triángulo: " + e.getMessage());
+                break;
+            }
+        }
+    }
+
+    public void listarFiguras() throws Exception{
+        ArrayList<Figura> listaFiguras = new ArrayList<>();
+        GestorCirculo.listarCirculos(listaFiguras);
+        GestorCuadrado.listarCuadrados(listaFiguras);
+        GestorRectangulo.listarRectangulos(listaFiguras);
+        GestorRombo.listarRombos(listaFiguras);
+        GestorTriangulo.listarTriangulos(listaFiguras);
+
+        for (Figura figuraTemp : listaFiguras) {
+            System.out.println(figuraTemp);
         }
     }
 }

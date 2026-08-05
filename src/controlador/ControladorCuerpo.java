@@ -1,12 +1,14 @@
 package controlador;
 
 import modelo.Coleccion;
+import modelo.cuerpos.Cuerpo;
 import modelo.cuerpos.cilindro.GestorCilindro;
 import modelo.cuerpos.cubo.GestorCubo;
 import modelo.cuerpos.esfera.GestorEsfera;
 import modelo.cuerpos.tetraedro.GestorTetraedro;
 import vista.Menu;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ControladorCuerpo {
@@ -97,6 +99,18 @@ public class ControladorCuerpo {
             System.out.println("El dato ingresado no es un número válido.");
         } catch (Exception e) {
             menu.mostrarMensaje("Error al crear Tetraedro: " + e.getMessage());
+        }
+    }
+
+    public void listarCuerpos() throws Exception{
+        ArrayList<Cuerpo> listaCuerpos = new ArrayList<>();
+        GestorCilindro.listarCilindros(listaCuerpos);
+        GestorCubo.listarCubos(listaCuerpos);
+        GestorEsfera.listarEsfera(listaCuerpos);
+        GestorTetraedro.listarTetraedros(listaCuerpos);
+
+        for (Cuerpo cuerpoTemp : listaCuerpos) {
+            System.out.println(cuerpoTemp);
         }
     }
 }

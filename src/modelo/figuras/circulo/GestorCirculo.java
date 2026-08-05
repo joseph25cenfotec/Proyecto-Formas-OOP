@@ -5,4 +5,8 @@ public class GestorCirculo {
         Circulo nuevoCirculo = new Circulo(radio);
         return DAOCirculo.insertarCirculo(nuevoCirculo);
     }
+
+    public static void listarCirculos() throws Exception {
+        System.out.println("TODO");
+    }
 }
